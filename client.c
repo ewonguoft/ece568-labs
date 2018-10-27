@@ -168,7 +168,7 @@ int main(int argc, char **argv)
   if(connect(sock,(struct sockaddr *)&addr, sizeof(addr))<0)
     perror("connect");
 
-  BIO* sbio = BIO_new_socket(socket,BIO_NOCLOSE);
+  BIO* sbio = BIO_new_socket(sock,BIO_NOCLOSE);
   SSL* ssl;
   ssl = SSL_new(ctx);
   SSL_set_bio(ssl,sbio,sbio);
@@ -187,7 +187,7 @@ int main(int argc, char **argv)
     err = SSL_get_error(ssl, err);
     printf("Error writing failed with: %d\n",err);
   }  
-  
+  sleep(3);
   //len = recv(sock, &buf, 255, 0);
   len = SSL_read(ssl, &buf, 255);
   if(len<=0){

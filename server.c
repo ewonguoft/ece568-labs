@@ -20,8 +20,8 @@
 #define FMT_NO_VERIFY "ECE568-SERVER: Certificate does not verify\n"
 
 //strings
-#define CLIENT_EMAIL "ece568bob@ecf.utoronto.ca"
-#define HOST "Bob's Server"
+#define CLIENT_EMAIL "ece568alice@ecf.utoronto.ca"
+#define HOST "Alice's Client"
 
 SSL_CTX* CreateCTX(void){
 
@@ -201,7 +201,6 @@ int main(int argc, char **argv)
       buf[len]= '\0';
       printf(FMT_OUTPUT, buf, answer);
 
-      len = strlen(s);
       int err = SSL_write(ssl, answer, strlen(answer));
       if(err<=0){
           err = SSL_get_error(ssl, err);
