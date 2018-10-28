@@ -1,0 +1,4 @@
+#Elton Wong, 1000625433, eltong.wong@mail.utoronto.ca
+#James Elson, 1001444083, jamespd.elson@mail.utoronto.ca
+
+In this lab, there were 2 main components: the server and the client. For the server, we created the context from bob.pem and verified it using 568ca.pem. We then wait for the handshake, check the certificate and then write back the response. For the client, it was implemented similarly but instead used alice.pem. The same handshake protocol was initiated and the message was sent and waited for the response from the server.
