@@ -101,10 +101,13 @@ void check_cert(SSL* ssl){
             exit(-8);
         }
 
-	X509_NAME_get_text_by_NID(X509_get_subject_name(peer), NID_certificate_issuer, peer_cert, BUFFSIZE);
+	char *issuer = X509_NAME_oneline(X509_get_issuer_name(peer),0,0);
+	//int nid_cert_issuer = X509_get_issuer_name( "ece568" );
+	//X509_NAME_get_text_by_NID(X509_get_subject_name(peer), nid_cert_issuer, peer_cert, BUFFSIZE);
 
         //print out server CN, email, and certificate issuer
-        printf(FMT_SERVER_INFO, peer_CN, peer_EM, peer_cert);
+        printf(FMT_SERVER_INFO, peer_CN, peer_EM, issuer);
+
         X509_free(peer);
     }else{
         printf(FMT_CONNECT_ERR);
@@ -187,7 +190,7 @@ int main(int argc, char **argv)
     err = SSL_get_error(ssl, err);
     printf("Error writing failed with: %d\n",err);
   }  
-  sleep(3);
+
   //len = recv(sock, &buf, 255, 0);
   len = SSL_read(ssl, &buf, 255);
   if(len<=0){
@@ -199,7 +202,23 @@ int main(int argc, char **argv)
   /* this is how you output something for the marker to pick up */
   printf(FMT_OUTPUT, secret, buf);
 
-  
+  //shutdown
+      int r = SSL_shutdown(ssl);
+      if(!r){
+          shutdown(sock,1);
+          r = SSL_shutdown(ssl);
+      }
+
+
+      switch(r){
+          case 1:
+              break;
+          case 0:
+          case -1:
+          default:
+              printf(FMT_INCORRECT_CLOSE);
+      }
+      SSL_free(ssl);
   
   close(sock);
   return 1;

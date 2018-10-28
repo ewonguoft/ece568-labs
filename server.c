@@ -191,12 +191,15 @@ int main(int argc, char **argv)
       }
 
       //debug
-      printf("connection successful using Version: %s, Cipher %s\n", SSL_get_version(ssl), SSL_get_cipher(ssl));
+      //printf("connection successful using Version: %s, Cipher %s\n", SSL_get_version(ssl), SSL_get_cipher(ssl));
 
       len = SSL_read(ssl, &buf, 255);
       if(len<=0){
           printf("SSL read error\n");
       }
+
+	
+
       //print spec 4.2
       buf[len]= '\0';
       printf(FMT_OUTPUT, buf, answer);
@@ -206,7 +209,6 @@ int main(int argc, char **argv)
           err = SSL_get_error(ssl, err);
           printf("Error writing failed with: %d\n",err);
       }      
-
 
       //shutdown
       int r = SSL_shutdown(ssl);
