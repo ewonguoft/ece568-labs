@@ -56,7 +56,7 @@ SSL_CTX* CreateCTX(void){
     SSL_CTX_set_default_passwd_cb_userdata(ctx, "password");
     
     if(!SSL_CTX_check_private_key(ctx)){
-	fprintf(stderr, "private key and public certificate dont match\n");
+	printf(FMT_NO_VERIFY);
 	exit(-5);
     }
     

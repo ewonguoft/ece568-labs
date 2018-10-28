@@ -60,7 +60,7 @@ SSL_CTX* CreateCTX(void){
     SSL_CTX_set_default_passwd_cb_userdata(ctx, "password");
     
     if(!SSL_CTX_check_private_key(ctx)){
-	fprintf(stderr, "private key and public certificate dont match\n");
+	printf(FMT_NO_VERIFY);
 	exit(-5);
     }
     
@@ -101,10 +101,7 @@ void check_cert(SSL* ssl){
             exit(-8);
         }
 
-	//char *issuer = X509_NAME_oneline(X509_get_issuer_name(peer),0,0);
 	X509_NAME_get_text_by_NID(X509_get_issuer_name(peer), NID_commonName, peer_cert, BUFFSIZE);
-	//int nid_cert_issuer = X509_get_issuer_name( "ece568" );
-	//X509_NAME_get_text_by_NID(X509_get_subject_name(peer), nid_cert_issuer, peer_cert, BUFFSIZE);
 
         //print out server CN, email, and certificate issuer
         printf(FMT_SERVER_INFO, peer_CN, peer_EM, peer_cert);
