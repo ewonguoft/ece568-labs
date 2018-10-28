@@ -41,7 +41,7 @@ SSL_CTX* CreateCTX(void){
         exit(-1);
     }
     
-    if (SSL_CTX_set_cipher_list(ctx, "ALL") <= 0)
+    if (SSL_CTX_set_cipher_list(ctx, "SHA1") <= 0)
     {
         ERR_print_errors_fp(stderr);
         exit(-2);
@@ -101,12 +101,13 @@ void check_cert(SSL* ssl){
             exit(-8);
         }
 
-	char *issuer = X509_NAME_oneline(X509_get_issuer_name(peer),0,0);
+	//char *issuer = X509_NAME_oneline(X509_get_issuer_name(peer),0,0);
+	X509_NAME_get_text_by_NID(X509_get_issuer_name(peer), NID_commonName, peer_cert, BUFFSIZE);
 	//int nid_cert_issuer = X509_get_issuer_name( "ece568" );
 	//X509_NAME_get_text_by_NID(X509_get_subject_name(peer), nid_cert_issuer, peer_cert, BUFFSIZE);
 
         //print out server CN, email, and certificate issuer
-        printf(FMT_SERVER_INFO, peer_CN, peer_EM, issuer);
+        printf(FMT_SERVER_INFO, peer_CN, peer_EM, peer_cert);
 
         X509_free(peer);
     }else{
