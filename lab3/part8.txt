@@ -1,0 +1,4 @@
+8546
+
+query used:
+101 AND (SELECT pin FROM pins WHERE cc_number=1234123412341234 > 8545);

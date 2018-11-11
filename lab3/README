@@ -1,0 +1,15 @@
+part3:
+input in title anything and in message the img which will transfer the money.
+
+part4:
+same as in part3, except add a confirm field in the 2nd image. 
+
+part6:
+close the SQL statement with ' and using an or 1=1 to always evaluate to true.
+
+part7:
+similar idea to part 6, where we close the statement with ''; and issue an update command.
+trigger was created by following the hint
+
+part8:
+we know that account #101 exists, so add an AND statement comparing the pin gotten from the credit card number with arbitrary numbers until it is evaluated as true then false. 
