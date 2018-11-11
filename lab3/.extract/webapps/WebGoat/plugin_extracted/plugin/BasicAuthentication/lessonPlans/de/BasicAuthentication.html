@@ -1,0 +1,15 @@
+<div align="Center"> 
+<p><b>Lehrplan:</b> Basic Authentication </p>
+</div>
+<p><b>Lehrinhalt:</b></p>
+<!-- Start Instructions -->
+"Basic Authentication" wird benutzt um Server-seitige Resource zu sch�tzen. Wird eine Anfrage an eine gesch�tzte Resource gestellt, so sendet der Webserver ein "401 authentication request" mit der Antwort auf diese Anfrage.
+Dann fragt, auf der Client Seite, der Browser den Benutzer mittels einer Dialogbox nach Benutzername und Passwort f�r diese Resource.
+Der Browser enkodiert Benutzername und Passwort mit base64 und sendet diese Zugangsdaten zum Webserver.
+Daraufhin validiert der Webserver Benutzername und Passwort und gibt als Antwort die angeforderte Resource zur�ck falls die �bermittelten Zugangsdaten korrekt sind.
+Die Zugangsdaten werden vom Browser bei jedem weiteren Zugriff auf gesch�tzte Resourcen mitgesendet ohne dass der Benutzer
+sie ein weiteres Mal eingeben muss.<br/>  
+    <br/>
+<p><b>Grunds&auml;tzliche(s) Ziel(e):</b></p>
+Das Ziel dieser Lektion ist es "Basic Authentication" zu verstehen und die folgenden Fragen zu beantworten. 
+<!-- Stop Instructions -->

