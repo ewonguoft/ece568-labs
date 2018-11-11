@@ -1,10 +1,16 @@
 #webgoat
-#Thu Nov 08 10:33:36 EST 2018
+#Sun Nov 11 15:10:19 EST 2018
+src=1406352188
+cookie=
+Reflected\ XSS\ Attacks.viewedLessonPlan=false
+menu=900
+card=4128321400021999
+credit=
+Reflected\ XSS\ Attacks.viewedCookies=false
 Reflected\ XSS\ Attacks.viewedSource=false
-Reflected\ XSS\ Attacks.numVisits=2
+Reflected\ XSS\ Attacks.numVisits=25
+Reflected\ XSS\ Attacks.completed=false
 Reflected\ XSS\ Attacks.viewedParameters=false
 Reflected\ XSS\ Attacks.viewedHtml=false
 Reflected\ XSS\ Attacks.maxHintLevel=0
-Reflected\ XSS\ Attacks.viewedLessonPlan=false
-Reflected\ XSS\ Attacks.viewedCookies=false
-Reflected\ XSS\ Attacks.completed=false
+PROPERTY=

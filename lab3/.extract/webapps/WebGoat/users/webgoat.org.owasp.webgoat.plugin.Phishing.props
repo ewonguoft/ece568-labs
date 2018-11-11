@@ -1,10 +1,15 @@
 #webgoat
-#Sun Nov 11 13:08:12 EST 2018
-Phishing\ with\ XSS.completed=false
-Phishing\ with\ XSS.viewedCookies=false
-Phishing\ with\ XSS.viewedHtml=false
-Phishing\ with\ XSS.viewedParameters=false
-Phishing\ with\ XSS.maxHintLevel=0
-Phishing\ with\ XSS.numVisits=78
-Phishing\ with\ XSS.viewedSource=false
+#Sun Nov 11 15:05:28 EST 2018
+passText=
 Phishing\ with\ XSS.viewedLessonPlan=false
+Phishing\ with\ XSS.completed=false
+Phishing\ with\ XSS.maxHintLevel=0
+Phishing\ with\ XSS.numVisits=147
+user=
+Phishing\ with\ XSS.viewedParameters=false
+userText=
+Phishing\ with\ XSS.viewedSource=false
+Phishing\ with\ XSS.viewedHtml=false
+password=
+Phishing\ with\ XSS.viewedCookies=false
+PROPERTY=yes
